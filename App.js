@@ -5,7 +5,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Login from './src/pages/Login';
 import SignUp from './src/pages/SignUp';
 import Tabs from './src/pages/Tabs'
-import Property from './src/pages/Property'
+import Property from './src/pages/Property';
+import ContracterPage from './src/pages/ContracterPage';
+import Profile from './src/components/Profile'
+import Home from './src/components/Home';
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -16,6 +19,9 @@ function App() {
         <Stack.Screen name="SignUp" component={SignUp} />
         <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}/>
         <Stack.Screen name="Property" component={Property} options={{headerShown:false}}/>
+        <Stack.Screen name="ContracterPage" component={ContracterPage} options={{headerShown:false}}/>
+        <Stack.Screen name="Home" component={Home} options={{headerShown:false}}/>
+        <Stack.Screen name="Profile" component={Profile} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

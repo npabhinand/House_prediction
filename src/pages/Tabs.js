@@ -6,10 +6,12 @@ import Notification from '../components/Notification';
 import { Avatar } from '@rneui/base';
 const Tab = createBottomTabNavigator();
 
-const Tabs = ({navigation}) => {
+const Tabs = ({navigation,route}) => {
+  const {userD }=route.params;
   return (
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} 
+      initialParams={{ userD: userD }}
         options={{
           tabBarLabel: '', // Set tabBarLabel to an empty string to hide the tab name
           tabBarIcon: ({ color }) => (
@@ -24,6 +26,7 @@ const Tabs = ({navigation}) => {
       />
   
       <Tab.Screen name="Notification" component={Notification} 
+      initialParams={{ userD: userD }}
         options={{
           tabBarLabel: '', // Set tabBarLabel to an empty string to hide the tab name
           tabBarIcon: ({ color }) => (
@@ -37,6 +40,7 @@ const Tabs = ({navigation}) => {
       />
       
       <Tab.Screen name="Profile" component={Profile} 
+      initialParams={{ userD: userD }}
         options={{
           tabBarLabel: '', // Set tabBarLabel to an empty string to hide the tab name
           tabBarIcon: ({ color }) => (

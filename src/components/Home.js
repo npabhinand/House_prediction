@@ -7,10 +7,11 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {Slider, Icon} from '@rneui/themed';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
-const Home = () => {
+const Home = ({route}) => {
   const navigation = useNavigation();
+  const {userD} = route.params;
 
   const [type, setType] = useState();
   const [furniture, setFurniture] = useState();
@@ -18,13 +19,26 @@ const Home = () => {
   const [bathrooms, setBathrooms] = useState();
   const [propertySize, setPropertySize] = useState();
 
-  const color = () => {
-    // let r = interpolate(255, 0);
-    // let g = interpolate(0, 255);
-    // let b = interpolate(0, 0);
-    // return `rgb(${r},${g},${b})`;
-  };
+  const color = () => {};
 
+  const handleSubmit = async () => {
+    const propertyData = {
+      price: 26500,
+      propertySize: propertySize,
+      furniture: furniture,
+      bedrooms: bedrooms,
+      bathrooms: bathrooms,
+      place: userD.place,
+      userName: userD.name,
+      phone: userD.phone,
+      userId:userD.email,
+      status: 'Available',
+  };
+    console.log(propertyData);
+    navigation.navigate("Property", { userD, propertyData });
+  }
+  
+  
   return (
     <View style={styles.container}>
       <ScrollView>
@@ -303,9 +317,7 @@ const Home = () => {
         </View>
         {/*  */}
 
-        <TouchableOpacity
-          style={styles.btnsubmit}
-          onPress={() => navigation.navigate('Property')}>
+        <TouchableOpacity style={styles.btnsubmit} onPress={handleSubmit}>
           <Text style={[styles.btnText, {fontSize: 18, color: 'white'}]}>
             Predict Price
           </Text>

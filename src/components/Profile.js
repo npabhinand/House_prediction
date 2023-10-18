@@ -1,10 +1,23 @@
-import {View, Text, Image, StyleSheet,TouchableOpacity} from 'react-native';
+import {View, Text, Image, StyleSheet,TouchableOpacity,ScrollView} from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-const Profile = () => {
+import {getAuth,signOut} from '@react-native-firebase/auth';
+// import { ScrollView } from 'react-native-gesture-handler';
+const auth=getAuth()
+const Profile = ({route}) => {
+  
+  const signOut = () => {
+    console.log("Signout called");
+    // Your authentication sign-out logic (e.g., Firebase.auth().signOut())
+    // After signing out, navigate to the Login screen.
+    navigation.navigate('Login');
+  };
+  
   const navigation = useNavigation();
+  const {userD} = route.params;
   return (
     <View style={styles.container}>
+      <ScrollView>
       <View style={{alignItems: 'center'}}>
         <Image
           source={require('../assets/house.jpg')}
@@ -16,7 +29,7 @@ const Profile = () => {
           source={require('../assets/person.png')}
           style={styles.boxImage}
         />
-        <Text style={styles.heading}>Arjun Babu</Text>
+        <Text style={styles.heading}>{userD.name}</Text>
       </View>
 
       <View style={styles.box}>
@@ -24,19 +37,30 @@ const Profile = () => {
           source={require('../assets/email.png')}
           style={styles.boxImage}
         />
-        <Text style={styles.heading}>npabhinand@gmail.com</Text>
+        <Text style={styles.heading}>{userD.email}</Text>
+      </View>
+      <View style={styles.box}>
+        <Image
+          source={require('../assets/email.png')}
+          style={styles.boxImage}
+        />
+        <Text style={styles.heading}>{userD.phone}</Text>
+      </View>
+      <View style={styles.box}>
+        <Image
+          source={require('../assets/email.png')}
+          style={styles.boxImage}
+        />
+        <Text style={styles.heading}>{userD.place}</Text>
       </View>
 
       <TouchableOpacity
         style={[styles.box,{backgroundColor:'#ff8717'}]}
-        onPress={()=>navigation.navigate('Login')}
+        onPress={signOut}
         >
-        {/* <Image
-          source={require('../assets/person.png')}
-          style={styles.boxImage}
-        /> */}
         <Text style={{color: '#FFFFFF',fontSize:20}}>Logout</Text>
       </TouchableOpacity>
+      </ScrollView>
     </View>
   );
 };

@@ -1,14 +1,64 @@
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  ToastAndroid,
+  TextInput,
+  ScrollView
+} from 'react-native';
+import React,{useState} from 'react';
 import {Avatar} from '@rneui/base';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
 
-const Property = ({navigation}) => {
+const Property = () => {
+  const navigation = useNavigation();
+  const route = useRoute();
+  const {userD, propertyData} = route.params;
+  const [price, setPrice] = useState();
+  const [isUpdated, setIsUpdated] = useState(false); 
+
+  // console.log(PropertyData)
+  const onSubmit = async () => {
+    try {
+      // Assuming 'user' is defined and you want to use user's UID as the document ID
+      const user = {}; // Replace this with your user data
+      await firestore()
+        .collection('property') // Create a subcollection for properties
+        .add(propertyData);
+      ToastAndroid.show('Property added successfully', ToastAndroid.SHORT);
+      navigation.navigate('Tabs', {userD});
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
+
+  const onRequest = async () => {
+    try {
+      const data = {
+        status: 'Requested',
+        contracterPrice: price, // Use the updated price
+      };
+
+      // Update the property with the new price and status
+      await firestore().collection('property').doc(propertyData.propertyId).set(data, { merge: true });
+      ToastAndroid.show('Property updated successfully', ToastAndroid.SHORT);
+      navigation.navigate('ContracterPage', { userD });
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
     <View style={{flex: 1}}>
+      <ScrollView>
       <View style={styles.imageContainer}>
         <Image source={require('../assets/house.jpg')} style={styles.image} />
         <View style={styles.pricetag}>
-          <Text style={styles.pricetagText}>Price</Text>
+          <Text style={styles.pricetagText}>₹{propertyData.price}</Text>
         </View>
       </View>
       <View style={styles.location}>
@@ -16,7 +66,9 @@ const Property = ({navigation}) => {
           source={require('../assets/location.png')}
           containerStyle={{marginTop: 10}}
         />
-        <Text style={{fontSize: 18, marginLeft: -10}}>Kozhikode, Kerala</Text>
+        <Text style={{fontSize: 18, marginLeft: -10}}>
+          {propertyData.place}
+        </Text>
       </View>
 
       <View style={styles.containers}>
@@ -25,7 +77,7 @@ const Property = ({navigation}) => {
             source={require('../assets/bedroom.png')}
             style={styles.boxImage}
           />
-          <Text style={styles.boxText}>4 Beds</Text>
+          <Text style={styles.boxText}>{propertyData.bedrooms} Bed</Text>
         </View>
 
         <View style={styles.box}>
@@ -33,7 +85,7 @@ const Property = ({navigation}) => {
             source={require('../assets/bath.png')}
             style={styles.boxImage}
           />
-          <Text style={styles.boxText}>4 Bath</Text>
+          <Text style={styles.boxText}>{propertyData.bathrooms} Bath</Text>
         </View>
 
         <View style={styles.box}>
@@ -49,7 +101,7 @@ const Property = ({navigation}) => {
             source={require('../assets/directions.png')}
             style={styles.boxImage}
           />
-          <Text style={styles.boxText}>300 m3</Text>
+          <Text style={styles.boxText}>{propertyData.propertySize}</Text>
         </View>
       </View>
       <Text style={{padding: 10, fontSize: 18, fontWeight: '500'}}>
@@ -65,16 +117,28 @@ const Property = ({navigation}) => {
           remaining essentially unchanged.
         </Text>
       </View>
-
-      <TouchableOpacity
-        style={styles.btnsubmit}
-         onPress={() => navigation.navigate('Tabs')}
-         >
-        <Text style={[styles.pricetagText,{marginTop:15,fontSize:20}]}>
-          Publish
-        </Text>
-      </TouchableOpacity>
+      {userD.userType === "user" ? (
+  <TouchableOpacity style={styles.btnsubmit} onPress={onSubmit}>
+    <Text style={[styles.pricetagText, { marginTop: 15, fontSize: 20 }]}>
+      Publish
+    </Text>
+  </TouchableOpacity>
+) : (
+  <>
+  <TextInput
+  style={styles.priceInput}
+  value={price.toString()}
+  onChangeText={(text) => setPrice(text)}
+/>
+  <TouchableOpacity style={styles.btnsubmit} onPress={onRequest}> 
+    <Text style={[styles.pricetagText, { marginTop: 15, fontSize: 20 }]}>
+      Request
+    </Text>
+  </TouchableOpacity> 
+  </>
+)}</ScrollView>
     </View>
+  
   );
 };
 
@@ -146,6 +210,16 @@ const styles = StyleSheet.create({
     marginTop: 30,
     borderRadius: 30,
     alignSelf: 'center',
+  },
+  priceInput: {
+    // backgroundColor: '#ff8717',
+    textAlign:'center',
+    height: 55,
+    width: '95%',
+    marginTop: 30,
+    borderRadius: 30,
+    alignSelf: 'center',
+    borderWidth:1
   },
 });
 
