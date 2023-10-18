@@ -12,6 +12,7 @@ import {
 import { Avatar } from '@rneui/base';
 import { getAuth, signInWithEmailAndPassword } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import firebase from '@react-native-firebase/app';
 
 const auth = getAuth(); // Get the authentication object
 
@@ -21,52 +22,40 @@ export default function Login({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
-    try {
-      await signInWithEmailAndPassword(auth, email, password); // Use signInWithEmailAndPassword with the auth object
-      const user = auth.currentUser;
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    const user = auth.currentUser;
 
-      // Rest of your code...
-      firestore()
-        .collection('users')
-        .where('email', '==', user.email)
-        .get()
-        .then((querySnapshot) => {
-          if (!querySnapshot.empty) {
-            const userD = querySnapshot.docs[0].data();
+    // Rest of your code...
+    firestore()
+      .collection('users')
+      .where('email', '==', user.email)
+      .get()
+      .then((querySnapshot) => {
+        if (!querySnapshot.empty) {
+          const userD = querySnapshot.docs[0].data();
 
-            // Log the user's userType for debugging
-            console.log('User Type:', userD.userType);
+          console.log('User Type:', userD.userType);
 
-            // Check the userType and navigate accordingly
-            if (userD.userType === 'user') {
-              // Navigate to the 'Tabs' screen with userD as a parameter
-              navigation.reset({
-                index: 0,
-                routes: [{ name: 'Tabs', params: { userD } }],
-              });
-            } else {
-              // Navigate to the 'ContracterPage' screen with userD as a parameter
-              navigation.reset({
-                index: 0,
-                routes: [{ name: 'ContracterPage', params: { userD } }],
-              });
-            }
+          if (userD.userType === 'user') {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'Tabs', params: { userD } }],
+            });
+          } else {
+            navigation.reset({
+              index: 0,
+              routes: [{ name: 'ContracterPage', params: { userD } }],
+            });
           }
-        })
-        .catch((err) => console.log('Firestore Error:', err));
-    } catch (error) {
-      console.error('Login Error:', error);
-      console.log('Error Code:', error.code);
-      console.log('Error Message:', error.message);
-    
-      if (error.code === 'auth/invalid-login') {
-        // Handle the "INVALID_LOGIN_CREDENTIALS" error
-        Alert.alert('Invalid Username or Password');
-      } else {
-        // Handle other errors accordingly
-      }
-    }
-  };
+        }
+      });
+  } catch (error) {
+    console.error('Login Error:', error);
+    Alert.alert('Login Error', error.message); // Move the Alert here
+  }
+};
+
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);

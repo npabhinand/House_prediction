@@ -9,6 +9,7 @@ import Property from './src/pages/Property';
 import ContracterPage from './src/pages/ContracterPage';
 import Profile from './src/components/Profile'
 import Home from './src/components/Home';
+import Notification from './src/components/Notification';
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Stack.Screen name="ContracterPage" component={ContracterPage} options={{headerShown:false}}/>
         <Stack.Screen name="Home" component={Home} options={{headerShown:false}}/>
         <Stack.Screen name="Profile" component={Profile} options={{headerShown:false}}/>
+        <Stack.Screen name="Notification" component={Notification} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

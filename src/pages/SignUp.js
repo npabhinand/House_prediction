@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Image, ToastAndroid } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Image, ToastAndroid,Alert } from 'react-native';
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 import { Avatar } from '@rneui/base';
@@ -17,11 +17,17 @@ export default function Login({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSignUp = async () => {
+    if (!email || !password || !name || !phone || !place) {
+      // Check if any required field is empty
+      Alert.alert('Error', 'Please fill in all the required fields');
+      return; // Exit the function
+    }
+  
     try {
       const userCredentials = await auth().createUserWithEmailAndPassword(email, password);
       const user = userCredentials.user;
       console.log(user.email);
-
+  
       // Store user data in Firestore
       await firestore().collection('users')
         .doc(user.uid) // Use user's UID as the document ID
@@ -30,9 +36,9 @@ export default function Login({ navigation }) {
           email: email,
           phone: phone,
           name: name,
-          place:place
+          place: place
         });
-
+  
       ToastAndroid.show('SignUp successful', ToastAndroid.SHORT);
       navigation.navigate('Login');
     } catch (error) {
@@ -87,7 +93,7 @@ export default function Login({ navigation }) {
       <View style={[styles.form1, {marginTop: 20}]}>
         <Avatar
           size={32}
-          source={require('../assets/email.png')}
+          source={require('../assets/phone.png')}
           containerStyle={{marginLeft: 10, marginTop: 5}}
         />
         <TextInput
@@ -95,10 +101,11 @@ export default function Login({ navigation }) {
           
           onChangeText={setPhone}></TextInput>
       </View>
+
       <View style={[styles.form1, {marginTop: 20}]}>
         <Avatar
           size={32}
-          source={require('../assets/email.png')}
+          source={require('../assets/location.png')}
           containerStyle={{marginLeft: 10, marginTop: 5}}
         />
         <TextInput

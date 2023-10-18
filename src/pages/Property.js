@@ -17,7 +17,7 @@ const Property = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {userD, propertyData} = route.params;
-  const [price, setPrice] = useState();
+  const [price, setPrice] = useState(propertyData.price.toString());
   const [isUpdated, setIsUpdated] = useState(false); 
 
   // console.log(PropertyData)
@@ -39,12 +39,18 @@ const Property = () => {
   const onRequest = async () => {
     try {
       const data = {
+        contracterId: userD.email,
+        contracterName:userD.name,
+        contracterPrice: price,
+        customerId:propertyData.userId,
+        customerName:propertyData.userName,
+        propertyId:propertyData.propertyId,
         status: 'Requested',
-        contracterPrice: price, // Use the updated price
+      // Use the updated price
       };
 
       // Update the property with the new price and status
-      await firestore().collection('property').doc(propertyData.propertyId).set(data, { merge: true });
+      await firestore().collection('contract').doc().set(data, { merge: true });
       ToastAndroid.show('Property updated successfully', ToastAndroid.SHORT);
       navigation.navigate('ContracterPage', { userD });
     } catch (error) {
@@ -127,7 +133,7 @@ const Property = () => {
   <>
   <TextInput
   style={styles.priceInput}
-  value={price.toString()}
+  value={price} // Use the price state variable directly
   onChangeText={(text) => setPrice(text)}
 />
   <TouchableOpacity style={styles.btnsubmit} onPress={onRequest}> 

@@ -43,8 +43,9 @@ export default function ContracterPage({ navigation,route }) {
   return (
     <View style={styles.container}>
       <View style={styles.s1}>
-        <Text style={styles.mainText}>Hello Mentor</Text>
-        <Avatar source={require('../assets/chat.png')} />
+        <Text style={styles.mainText}>Hello {userD.name}</Text>
+        <Avatar source={require('../assets/bell.png')} 
+         onPress={() => navigation.navigate('Notification',{userD})}/>
         <Avatar
           source={require('../assets/person.png')}
           containerStyle={{marginRight: 10}}
