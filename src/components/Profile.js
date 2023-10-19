@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginLeft: 10,
+    color:'black'
   },
   box: {
     alignSelf: 'center',

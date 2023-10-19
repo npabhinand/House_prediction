@@ -13,6 +13,7 @@ const Tabs = ({navigation,route}) => {
       <Tab.Screen name="Home" component={Home} 
       initialParams={{ userD: userD }}
         options={{
+          headerShown:false,
           tabBarLabel: '', // Set tabBarLabel to an empty string to hide the tab name
           tabBarIcon: ({ color }) => (
             <Avatar
@@ -28,6 +29,7 @@ const Tabs = ({navigation,route}) => {
       <Tab.Screen name="Notification" component={Notification} 
       initialParams={{ userD: userD }}
         options={{
+          headerShown:false,
           tabBarLabel: '', // Set tabBarLabel to an empty string to hide the tab name
           tabBarIcon: ({ color }) => (
             <Avatar
@@ -39,9 +41,10 @@ const Tabs = ({navigation,route}) => {
         }}
       />
       
-      <Tab.Screen name="Profile" component={Profile} 
+      <Tab.Screen name="Profile" component={Profile}
       initialParams={{ userD: userD }}
         options={{
+          headerShown:false,
           tabBarLabel: '', // Set tabBarLabel to an empty string to hide the tab name
           tabBarIcon: ({ color }) => (
             <Avatar

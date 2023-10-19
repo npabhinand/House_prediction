@@ -22,6 +22,12 @@ export default function Login({ navigation }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      // Check if any required field is empty
+      Alert.alert('Invalied Login');
+      return; // Exit the function
+    }
+  
   try {
     await signInWithEmailAndPassword(auth, email, password);
     const user = auth.currentUser;
@@ -51,8 +57,8 @@ export default function Login({ navigation }) {
         }
       });
   } catch (error) {
-    console.error('Login Error:', error);
-    Alert.alert('Login Error', error.message); // Move the Alert here
+    // console.error('Login Error:', error);
+    Alert.alert('Invalied email or password'); // Move the Alert here
   }
 };
 
