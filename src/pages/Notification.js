@@ -38,12 +38,14 @@ export default function Notification({ route }) {
     };
 
     fetchData();
-  }, []);
+  }, [isUpdated]); 
 
-  const handleAccept = async (contractId) => {
+  const handleAccept = async (contractId,propertyId) => {
     const bookingRef = firestore().collection('contract').doc(contractId);
+    const propertyRef= firestore().collection('property').doc(propertyId);
     try {
       await bookingRef.update({ status: 'Accepted' });
+      await propertyRef.update({ status: 'Accepted' });
       console.log('Booking status updated to accepted');
       ToastAndroid.show('Requested status updated to accepted', ToastAndroid.SHORT);
       setIsUpdated(true); 
@@ -98,7 +100,7 @@ export default function Notification({ route }) {
                   color="#52A9E3"
                   containerStyle={styles.button}
                   titleStyle={{ fontSize: 18 }}
-                  onPress={() => handleAccept(item.contractId)}
+                  onPress={() => handleAccept(item.contractId,item.propertyId)}
                 />
               </View>
             </Card>
@@ -118,7 +120,7 @@ export default function Notification({ route }) {
                 <Text style={styles.font1}>{item.customerName}</Text>
               </View>
               <View style={styles.rows}>
-                <Text style={styles.font2}>{item.customerName} Accepted Your Request at the price</Text>
+                <Text style={styles.font2}>Accepted Your Request at the price</Text>
                 <Text style={[styles.font2, { color: 'black', fontWeight: 'bold' }]}>:₹{item.contracterPrice}</Text>
               </View>
             </Card>
@@ -159,6 +161,7 @@ const styles = StyleSheet.create({
   rows: {
     flexDirection: 'row',
     alignItems: 'center',
+    textAlign:'justify'
   },
   button: {
     width: 150,

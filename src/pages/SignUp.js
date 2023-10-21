@@ -1,7 +1,7 @@
 import { View, Text, SafeAreaView, StyleSheet, TextInput, TouchableOpacity, Image, ToastAndroid,Alert } from 'react-native';
 import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
-import { Avatar } from '@rneui/base';
+import { Avatar, color } from '@rneui/base';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'; // Import Firestore
 import firebase from '@react-native-firebase/app';
@@ -62,7 +62,7 @@ export default function Login({ navigation }) {
             status={checked === 'user' ? 'checked' : 'unchecked'}
             onPress={() => setChecked('user')}
           />
-          <Text style={{ marginRight: 20, fontSize: 18 }}>User</Text>
+          <Text style={{ marginRight: 20, fontSize: 18 ,color:'black'}}>User</Text>
           <RadioButton
             value="contractor"
             status={checked === 'contractor' ? 'checked' : 'unchecked'}
@@ -75,7 +75,7 @@ export default function Login({ navigation }) {
         <Avatar source={require('../assets/person.png')} containerStyle={{marginLeft:5}}/>
         <TextInput
           placeholder="Enter Name"
-          on
+          style={{ color: 'black' }} placeholderTextColor="black"
           onChangeText={setName}></TextInput>
       </View>
       <View style={[styles.form1, {marginTop: 20}]}>
@@ -86,7 +86,7 @@ export default function Login({ navigation }) {
         />
         <TextInput
           placeholder="Enter Email"
-          
+          style={{ color: 'black' }} placeholderTextColor="black"
           onChangeText={setEmail}></TextInput>
       </View>
       {/*  */}
@@ -98,7 +98,7 @@ export default function Login({ navigation }) {
         />
         <TextInput
           placeholder="Enter Phone Number"
-          
+          style={{ color: 'black' }} placeholderTextColor="black"
           onChangeText={setPhone}></TextInput>
       </View>
 
@@ -110,7 +110,7 @@ export default function Login({ navigation }) {
         />
         <TextInput
           placeholder="Enter your location"
-          
+          style={{ color: 'black' }} placeholderTextColor="black"
           onChangeText={setPlace}></TextInput>
       </View>
     {/*  */}
@@ -120,7 +120,7 @@ export default function Login({ navigation }) {
           source={require('../assets/password.png')}
           containerStyle={{marginLeft: 5}}
         />
-        <TextInput placeholder="Enter Password" onChangeText={setPassword}  secureTextEntry={!showPassword} />
+        <TextInput placeholder="Enter Password" onChangeText={setPassword}  secureTextEntry={!showPassword} style={{ color: 'black' }} placeholderTextColor="black"/>
         <TouchableOpacity
               style={{
                 position: "absolute",
@@ -151,7 +151,7 @@ export default function Login({ navigation }) {
       </View>
 
       <View style={styles.signup}>
-        <Text>Already have an account?</Text>
+        <Text style={{color:'black'}}>Already have an account?</Text>
         <Text
           style={styles.textColor}
           onPress={() => navigation.navigate('Login')}>
@@ -186,6 +186,7 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     width: '95%',
     borderRadius: 10,
+    color:'black'
   },
   Button: {
     width: '95%',
@@ -214,6 +215,7 @@ const styles = StyleSheet.create({
      padding: 10 
     },
     radioText:{ marginRight: 20,
-       fontSize: 18 
+       fontSize: 18 ,
+       color:'black'
       }
 });

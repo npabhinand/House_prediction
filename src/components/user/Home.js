@@ -18,6 +18,7 @@ const Home = ({route}) => {
   const [bedrooms, setBedrooms] = useState();
   const [bathrooms, setBathrooms] = useState();
   const [propertySize, setPropertySize] = useState();
+  const [date, setDate] = useState(new Date())
 
   const color = () => {};
 
@@ -33,6 +34,7 @@ const Home = ({route}) => {
       phone: userD.phone,
       userId:userD.email,
       status: 'Available',
+      Date: date.toISOString()
   };
     console.log(propertyData);
     navigation.navigate("Property", { userD, propertyData });

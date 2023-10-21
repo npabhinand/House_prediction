@@ -79,14 +79,15 @@ export default function Login({ navigation }) {
         />
        <TextInput
           placeholder="Enter Email"
-          onChangeText={setEmail}></TextInput>
+          onChangeText={setEmail}
+          style={{ color: 'black' }} placeholderTextColor="black"></TextInput>
       </View>
       <View style={[styles.form1, {marginTop: 20}]}>
         <Avatar
           source={require('../assets/password.png')}
           containerStyle={{marginLeft: 5}}
         />
-        <TextInput placeholder="Enter Password" onChangeText={setPassword}  secureTextEntry={!showPassword} />
+        <TextInput placeholder="Enter Password" onChangeText={setPassword}  secureTextEntry={!showPassword} style={{ color: 'black' }} placeholderTextColor="black"/>
         <TouchableOpacity
               style={{
                 position: "absolute",

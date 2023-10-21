@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Profile from '../components/Profile';
-import Home from '../components/Home';
-import Notification from '../components/Notification';
+import Profile from './Profile';
+import Home from '../components/user/Home';
+import Notification from './Notification';
 
 import { Avatar } from '@rneui/base';
 const Tab = createBottomTabNavigator();

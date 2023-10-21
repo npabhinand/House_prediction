@@ -7,9 +7,9 @@ import SignUp from './src/pages/SignUp';
 import Tabs from './src/pages/Tabs'
 import Property from './src/pages/Property';
 import ContracterPage from './src/pages/ContracterPage';
-import Profile from './src/components/Profile'
-import Home from './src/components/Home';
-import Notification from './src/components/Notification';
+import Profile from './src/pages/Profile'
+import Home from './src/components/user/Home';
+import Notification from './src/pages/Notification';
 const Stack = createNativeStackNavigator();
 
 function App() {
