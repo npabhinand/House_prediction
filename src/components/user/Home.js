@@ -4,287 +4,121 @@ import {
   StyleSheet,
   TouchableOpacity,
   ScrollView,
+  TextInput,
 } from 'react-native';
 import React, {useState} from 'react';
 import {Slider, Icon} from '@rneui/themed';
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import CheckBox from 'react-native-check-box';
 
 const Home = ({route}) => {
   const navigation = useNavigation();
   const {userD} = route.params;
 
-  const [type, setType] = useState();
-  const [furniture, setFurniture] = useState();
-  const [bedrooms, setBedrooms] = useState();
-  const [bathrooms, setBathrooms] = useState();
-  const [propertySize, setPropertySize] = useState();
-  const [date, setDate] = useState(new Date())
+  const [bedrooms, setBedrooms] = useState('No');
+  const [propertySize, setPropertySize] = useState('1000');
+  const [resale, setResale] = useState('No');
+  const [maintenanceStaff, setMaintenanceStaff] = useState('No');
+  const [gymnasium, setGymnasium] = useState('No');
+  const [swimmingPool, setSwimmingPool] = useState('No');
+  const [landscapedGardens, setLandscapedGardens] = useState('No');
+  const [joggingTrack, setJoggingTrack] = useState('No');
+  const [rainWaterHarvesting, setRainWaterHarvesting] = useState('No');
+  const [indoorGames, setIndoorGames] = useState('No');
+  const [shoppingmall, setShoppingMall] = useState('No');
+  const [interCom, SetInterCom] = useState('No');
+  const [sportsFacility, setSportsFacility] = useState('No');
+  const [atm, setAtm] = useState('No');
+  const [clubHouse, setClubHouse] = useState('No');
+  const [school, setSchool] = useState('No');
+  const [security, SetSecurity] = useState('No');
+  const [powerBackup, setPowerBackup] = useState('No');
+  const [carparking, setCarParking] = useState('No');
+  const [staffQuarter, setStaffQuarter] = useState('No');
+  const [cafteria, setCafteria] = useState('No');
+  const [multiPurposeRoom, setMultiPurposeRoom] = useState('No');
+  const [hospital, setHospital] = useState('No');
+  const [washingMachine,setWashingMachine]=useState('No')
+  const [gasConnection, setGasConnection] = useState('No');
+  const [AC, setAC] = useState('No');
+  const [wifi, setWifi] = useState('No');
+  const [childrenArea, setChildrenArea] = useState('No');
+  const [lift, setLift] = useState('No');
+  const [bed, setBed] = useState('No');
+  const [microWaveOwen, setMIcroWaveOwen] = useState('No');
+  const [TV, setTV] = useState('No');
+  const [sofa, setSofa] = useState('No');
+  const [wardrobe, setWardrobe] = useState('No');
+
+  const [date, setDate] = useState(new Date());
+  const [isChecked, setIsChecked] = useState(false);
 
   const color = () => {};
 
   const handleSubmit = async () => {
     const propertyData = {
       price: 26500,
-      propertySize: propertySize,
-      furniture: furniture,
-      bedrooms: bedrooms,
-      bathrooms: bathrooms,
-      place: userD.place,
+      Area : propertySize,
+      Bedrooms: bedrooms,
+      Resale: resale,
+      MaintenanceStaff: maintenanceStaff,
+      Gymnasium: gymnasium,
+      SwimmingPool:swimmingPool,
+      LandscapedGardens:landscapedGardens,
+      JoggingTrack:joggingTrack,
+      RainWaterHarvesting:rainWaterHarvesting,
+      IndoorGames:indoorGames,
+      ShoppingMall:shoppingmall,
+      InterCom:interCom,
+      sportsFacility:sportsFacility,
+      ATM:atm,
+      ClubHouse:clubHouse,
+      School:school,
+      Security:security,
+      powerBackup:powerBackup,
+      CarParking:carparking,
+      StaffQuarter:staffQuarter,
+      Cafteria:cafteria,
+      MultiPurposeRoom:multiPurposeRoom,
+      Hospital:hospital,
+      WashingMachine:washingMachine,
+      GasConnection:gasConnection,
+      AC:AC,
+      Wifi:wifi,
+      Childrenplayarea:childrenArea,
+      LiftAvailable:lift,
+      Bed:bed,
+      Microwave:microWaveOwen,
+      TV:TV,
+      Sofa:sofa,
+      Wardrobe:wardrobe,
+      // location:userD.place,
       userName: userD.name,
       phone: userD.phone,
-      userId:userD.email,
+      userId: userD.email,
       status: 'Available',
-      Date: date.toISOString()
-  };
+      Date: date.toISOString(),
+    };
     console.log(propertyData);
-    navigation.navigate("Property", { userD, propertyData });
-  }
-  
-  
+    navigation.navigate('Property', {userD, propertyData});
+  };
+  height: 40;
   return (
     <View style={styles.container}>
+      <View style={{backgroundColor: 'white', marginBottom: 20}}>
+        <Text style={styles.heading}>Predict The Price of House</Text>
+      </View>
       <ScrollView>
-        {/*  */}
-        <Text style={styles.head}>Home</Text>
+        <Text style={[styles.formText,{fontSize:20}]}>Bedrooms</Text>
+        <TextInput
+          onChangeText={setBedrooms}
+          placeholder="Enter Number Of Bed rooms"
+          style={styles.inputs}
+          placeholderTextColor={'black'}
+        />
 
-        <Text style={styles.formText}>Property Type</Text>
-        <View style={styles.btnGroup}>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              type === 'House' ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setType('House')}>
-            <Text
-              style={[
-                styles.btnText,
-                type === 'House' ? {color: 'white'} : null,
-              ]}>
-              House
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              type === 'Apartment' ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setType('Apartment')}>
-            <Text
-              style={[
-                styles.btnText,
-                type === 'Apartment' ? {color: 'white'} : null,
-              ]}>
-              Apartment
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              type === 'Flat' ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setType('Flat')}>
-            <Text
-              style={[
-                styles.btnText,
-                type === 'Flat' ? {color: 'white'} : null,
-              ]}>
-              Flat
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.formText}>Bedrooms</Text>
-        {/*  */}
-        <View style={styles.btnGroup}>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              bedrooms === 1 ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setBedrooms(1)}>
-            <Text
-              style={[
-                styles.btnText,
-                bedrooms === 1 ? {color: 'white'} : null,
-              ]}>
-              1
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              bedrooms === 2 ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setBedrooms(2)}>
-            <Text
-              style={[
-                styles.btnText,
-                bedrooms === 2 ? {color: 'white'} : null,
-              ]}>
-              2
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              bedrooms === 3 ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setBedrooms(3)}>
-            <Text
-              style={[
-                styles.btnText,
-                bedrooms === 3 ? {color: 'white'} : null,
-              ]}>
-              3
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              bedrooms === 4 ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setBedrooms(4)}>
-            <Text
-              style={[
-                styles.btnText,
-                bedrooms === 4 ? {color: 'white'} : null,
-              ]}>
-              4
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              bedrooms === 5 ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setBedrooms(5)}>
-            <Text
-              style={[
-                styles.btnText,
-                bedrooms === 5 ? {color: 'white'} : null,
-              ]}>
-              5
-            </Text>
-          </TouchableOpacity>
-        </View>
-        {/*  */}
-        <Text style={styles.formText}>Bathrooms</Text>
-        {/*  */}
-        <View style={styles.btnGroup}>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              bathrooms === 1 ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setBathrooms(1)}>
-            <Text
-              style={[
-                styles.btnText,
-                bathrooms === 1 ? {color: 'white'} : null,
-              ]}>
-              1
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              bathrooms === 2 ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setBathrooms(2)}>
-            <Text
-              style={[
-                styles.btnText,
-                bathrooms === 2 ? {color: 'white'} : null,
-              ]}>
-              2
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              bathrooms === 3 ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setBathrooms(3)}>
-            <Text
-              style={[
-                styles.btnText,
-                bathrooms === 3 ? {color: 'white'} : null,
-              ]}>
-              3
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              bathrooms === 4 ? {backgroundColor: '#ff8717'} : null,
-            ]}
-            onPress={() => setBathrooms(4)}>
-            <Text
-              style={[
-                styles.btnText,
-                bathrooms === 4 ? {color: 'white'} : null,
-              ]}>
-              4
-            </Text>
-          </TouchableOpacity>
-        </View>
-        {/*  */}
-
-        <Text style={styles.formText}>Furniture</Text>
-        <View style={styles.btnGroup}>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              furniture === 'Fully-Furnished'
-                ? {backgroundColor: '#ff8717'}
-                : null,
-            ]}
-            onPress={() => setFurniture('Fully-Furnished')}>
-            <Text
-              style={[
-                styles.btnText,
-                furniture === 'Fully-Furnished' ? {color: 'white'} : null,
-              ]}>
-              Fully-Furnished
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              furniture === 'Semi-Furnished'
-                ? {backgroundColor: '#ff8717'}
-                : null,
-            ]}
-            onPress={() => setFurniture('Semi-Furnished')}>
-            <Text
-              style={[
-                styles.btnText,
-                furniture === 'Semi-Furnished' ? {color: 'white'} : null,
-              ]}>
-              Semi-Furnished
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[
-              styles.btn,
-              furniture === 'No-furnished'
-                ? {backgroundColor: '#ff8717'}
-                : null,
-            ]}
-            onPress={() => setFurniture('No-furnished')}>
-            <Text
-              style={[
-                styles.btnText,
-                furniture === 'No-furnished' ? {color: 'white'} : null,
-              ]}>
-              No-furnished
-            </Text>
-          </TouchableOpacity>
-        </View>
-        {/*  */}
-
-        <Text style={styles.formText}>Property Size</Text>
-        <View style={[styles.contentView]}>
+        <Text style={[styles.formText,{fontSize:20}]}>Property Size</Text>
+        <View style={styles.contentView}>
           <Text
             style={[styles.formText, {color: '#1ebf94', fontWeight: '500'}]}>
             Up to {propertySize}sqft
@@ -317,6 +151,330 @@ const Home = ({route}) => {
             }}
           />
         </View>
+
+        {/*  */}
+        <View style={styles.row}>
+  <View style={styles.checkBoxRow}>
+    <CheckBox
+      isChecked={resale === 'Yes'}
+      onClick={() => setResale(resale === 'Yes' ? 'No' : 'Yes')}
+    />
+    <Text style={[styles.formText, { fontWeight: '500' }]}>Resale</Text>
+  </View>
+  <View style={styles.checkBoxRow}>
+    <CheckBox
+      isChecked={maintenanceStaff === 'Yes'}
+      onClick={() =>
+        setMaintenanceStaff(
+          maintenanceStaff === 'Yes' ? 'No' : 'Yes'
+        )
+      }
+    />
+    <Text style={[styles.formText, { fontWeight: '500'}]}>
+      Maintenance Staff
+    </Text>
+  </View>
+</View>
+
+{/* Repeat this structure for other checkboxes */}
+
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={gymnasium === 'Yes'}
+      onClick={() => setGymnasium(gymnasium === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Gymnasium
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={swimmingPool === 'Yes'}
+      onClick={() => setSwimmingPool(swimmingPool === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Swimming Pool
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={landscapedGardens === 'Yes'}
+      onClick={() => setLandscapedGardens(landscapedGardens === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              LandscapedGardens
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={joggingTrack === 'Yes'}
+      onClick={() => setJoggingTrack(joggingTrack === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Jogging Track
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={rainWaterHarvesting === 'Yes'}
+      onClick={() => setRainWaterHarvesting(rainWaterHarvesting === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Rain Water Harvesting
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={indoorGames === 'Yes'}
+      onClick={() => setIndoorGames(indoorGames === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Indoor Games
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={shoppingmall === 'Yes'}
+      onClick={() => setShoppingMall(shoppingmall === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Shopping Mall
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={interCom === 'Yes'}
+      onClick={() => SetInterCom(interCom === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>InterCom</Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={sportsFacility === 'Yes'}
+      onClick={() => setSportsFacility(sportsFacility === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Sports Facility
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={atm=== 'Yes'}
+      onClick={() => setAtm(atm === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>ATM</Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={clubHouse === 'Yes'}
+      onClick={() => setClubHouse(clubHouse === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Club House
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={school === 'Yes'}
+      onClick={() => setSchool(school === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>School</Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={security === 'Yes'}
+      onClick={() => SetSecurity(security === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              24X7 Security
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+            <CheckBox
+      isChecked={powerBackup === 'Yes'}
+      onClick={() => setPowerBackup(powerBackup === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Power Backup
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={carparking === 'Yes'}
+      onClick={() => setCarParking(carparking === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Car Parking
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={staffQuarter === 'Yes'}
+      onClick={() => setStaffQuarter(staffQuarter === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Staff Quarter
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={cafteria === 'Yes'}
+      onClick={() => setCafteria(cafteria === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Cafeteria
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={multiPurposeRoom === 'Yes'}
+      onClick={() => setMultiPurposeRoom(multiPurposeRoom === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Multi Purpose Room
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={hospital === 'Yes'}
+      onClick={() => setHospital(hospital === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>Hospital</Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={washingMachine === 'Yes'}
+      onClick={() => setWashingMachine(washingMachine === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Washing Machine
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={gasConnection === 'Yes'}
+      onClick={() => setGasConnection(washingMachine=== 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Gas Connection
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={AC === 'Yes'}
+      onClick={() => setAC(AC === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>AC</Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={wifi === 'Yes'}
+      onClick={() => setWifi(wifi === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>Wifi</Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={childrenArea === 'Yes'}
+      onClick={() => setChildrenArea(childrenArea === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Chilren's play Area
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={lift === 'Yes'}
+      onClick={() => setLift(lift === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Lift Available
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={bed=== 'Yes'}
+      onClick={() => setBed(bed === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>Bed</Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={microWaveOwen === 'Yes'}
+      onClick={() => setMIcroWaveOwen(microWaveOwen === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>
+              Micro Wave owen
+            </Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+            <CheckBox
+      isChecked={TV === 'Yes'}
+      onClick={() => setTV(TV=== 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>TV</Text>
+          </View>
+        </View>
+
+        <View style={styles.row}>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={sofa === 'Yes'}
+      onClick={() => setSofa(sofa === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>Sofa</Text>
+          </View>
+          <View style={styles.checkBoxRow}>
+          <CheckBox
+      isChecked={wardrobe === 'Yes'}
+      onClick={() => setWardrobe(wardrobe === 'Yes' ? 'No' : 'Yes')}
+    />
+            <Text style={[styles.formText, {fontWeight: '500'}]}>wardrobe</Text>
+          </View>
+        </View>
+        {/*  */}
+
         {/*  */}
 
         <TouchableOpacity style={styles.btnsubmit} onPress={handleSubmit}>
@@ -332,7 +490,28 @@ const Home = ({route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom:20
+    // padding: 10,
+    // backgroundColor:'white'
+  },
+  heading: {
     padding: 10,
+    color: 'black',
+    fontSize: 25,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // marginBottom: 10,
+    justifyContent:'flex-start',
+    padding:10
+  },
+  checkBoxRow:{ 
+    flexDirection: 'row',
+     alignItems: 'center' ,
+     width:200
   },
 
   head: {
@@ -343,10 +522,10 @@ const styles = StyleSheet.create({
   },
   formText: {
     fontWeight: '500',
-    fontSize: 20,
-    marginBottom: 10,
-    marginTop: 20,
+    fontSize: 17,
     color: 'black',
+    marginHorizontal: 5,
+    // marginLeft:-80
   },
   btnGroup: {
     flexDirection: 'row',
@@ -381,6 +560,14 @@ const styles = StyleSheet.create({
     marginTop: 30,
     borderRadius: 30,
     alignSelf: 'center',
+  },
+  inputs: {
+    borderWidth: 1,
+    width: '95%',
+    alignSelf: 'center',
+    borderRadius: 10,
+    marginBottom: 20,
+    marginTop:10
   },
 });
 export default Home;

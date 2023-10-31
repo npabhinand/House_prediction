@@ -60,7 +60,7 @@ const Property = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1,marginBottom:10}}>
       <ScrollView>
         <View style={styles.imageContainer}>
           <Image source={require('../assets/house.jpg')} style={styles.image} />
@@ -74,7 +74,7 @@ const Property = () => {
             containerStyle={{marginTop: 10}}
           />
           <Text style={{fontSize: 18, marginLeft: -10}}>
-            {propertyData.place}
+            {propertyData.location}
           </Text>
         </View>
 
@@ -84,15 +84,15 @@ const Property = () => {
               source={require('../assets/bedroom.png')}
               style={styles.boxImage}
             />
-            <Text style={styles.boxText}>{propertyData.bedrooms} Bed</Text>
+            <Text style={styles.boxText}>{propertyData.Bedrooms} Bed</Text>
           </View>
 
           <View style={styles.box}>
             <Image
-              source={require('../assets/bath.png')}
+              source={require('../assets/wifi.png')}
               style={styles.boxImage}
             />
-            <Text style={styles.boxText}>{propertyData.bathrooms} Bath</Text>
+            <Text style={styles.boxText}>{propertyData.Wifi}</Text>
           </View>
 
           <View style={styles.box}>
@@ -100,7 +100,7 @@ const Property = () => {
               source={require('../assets/rooms.png')}
               style={styles.boxImage}
             />
-            <Text style={styles.boxText}>7 Rooms</Text>
+            <Text style={styles.boxText}>7Rooms</Text>
           </View>
 
           <View style={styles.box}>
@@ -108,7 +108,7 @@ const Property = () => {
               source={require('../assets/directions.png')}
               style={styles.boxImage}
             />
-            <Text style={styles.boxText}>{propertyData.propertySize}</Text>
+            <Text style={styles.boxText}>{propertyData.Area} sqft</Text>
           </View>
         </View>
         <Text
@@ -117,20 +117,156 @@ const Property = () => {
             fontSize: 18,
             fontWeight: '500',
             color: 'black',
+            fontSize:20
           }}>
-          Description
+          Details
         </Text>
+
         <View
-          style={{justifyContent: 'center', marginLeft: 10, marginRight: 10}}>
-          <Text style={{color: 'black'}}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged.
+          style={styles.rows}>
+          <Text style={styles.text}>
+            Resale: {propertyData.Resale}
           </Text>
+          <Text style={styles.text}>
+            MaintenanceStaff: {propertyData.MaintenanceStaff}
+            </Text>
         </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            Gymnasium: {propertyData.Gymnasium}
+          </Text>
+          <Text style={styles.text}>
+            SwimmingPool: {propertyData.SwimmingPool}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            LandscapedGardens: {propertyData.LandscapedGardens}
+          </Text>
+          <Text style={styles.text}>
+            JoggingTrack: {propertyData.JoggingTrack}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            RainWaterHarvesting: {propertyData.RainWaterHarvesting}
+          </Text>
+          <Text style={styles.text}>
+            IndoorGames: {propertyData.IndoorGames}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            ShoppingMall: {propertyData.ShoppingMall}
+          </Text>
+          <Text style={styles.text}>
+            InterCom: {propertyData.InterCom}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            sportsFacility: {propertyData.sportsFacility}
+          </Text>
+          <Text style={styles.text}>
+            ATM: {propertyData.ATM}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            ClubHouse: {propertyData.ClubHouse}
+          </Text>
+          <Text style={styles.text}>
+            School: {propertyData.School}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            24X7Security: {propertyData.Security}
+          </Text>
+          <Text style={styles.text}>
+            powerBackup: {propertyData.powerBackup}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            CarParking: {propertyData.CarParking}
+          </Text>
+          <Text style={styles.text}>
+            StaffQuarter: {propertyData.StaffQuarter}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            Cafteria: {propertyData.Cafteria}
+          </Text>
+          <Text style={styles.text}>
+            MultiPurposeRoom: {propertyData.MultiPurposeRoom}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            Hospital: {propertyData.Hospital}
+          </Text>
+          <Text style={styles.text}>
+            WashingMachine: {propertyData.WashingMachine}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            GasConnection: {propertyData.GasConnection}
+          </Text>
+          <Text style={styles.text}>
+            AC: {propertyData.AC}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            Children'splayarea: {propertyData.Childrenplayarea}
+          </Text>
+          <Text style={styles.text}>
+            Lift Available: {propertyData.LiftAvailable}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            BED: {propertyData.Bed}
+          </Text>
+          <Text style={styles.text}>
+            microWaveOwen: {propertyData.Microwave}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+           TV: {propertyData.TV}
+          </Text>
+          <Text style={styles.text}>
+            Sofa: {propertyData.Sofa}
+            </Text>
+        </View>
+
+        <View style={styles.rows}>
+          <Text style={styles.text}>
+            Wifi: {propertyData.Wifi}
+          </Text>
+          <Text style={styles.text}>
+            Wardrobe: {propertyData.Wardrobe}
+            </Text>
+        </View>
+
         {userD.userType === 'user' ? (
           <TouchableOpacity style={styles.btnsubmit} onPress={onSubmit}>
             <Text style={[styles.pricetagText, {marginTop: 15, fontSize: 20}]}>
@@ -237,7 +373,15 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderWidth: 1,
     color: 'black',
+  },rows:{
+    flexDirection: 'row', 
+    marginLeft: 10, 
+    marginRight: 10
   },
+  text:{
+    color: 'black',
+    width:200,
+  fontSize:16}
 });
 
 export default Property;
