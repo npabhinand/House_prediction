@@ -6,92 +6,59 @@ import {
   ScrollView,
   TextInput,
 } from 'react-native';
-import React, {useState} from 'react';
-import {Slider, Icon} from '@rneui/themed';
-import {useNavigation} from '@react-navigation/native';
-import CheckBox from 'react-native-check-box';
 
+import React, {useState} from 'react';
+import {useNavigation} from '@react-navigation/native';
+import { Picker } from '@react-native-picker/picker';
 const Home = ({route}) => {
   const navigation = useNavigation();
   const {userD} = route.params;
+  const [msZoning, setMsZoning] = useState('A'); // Default value for MSZoning
+  const [lotArea, setLotArea] = useState(''); // You can set an empty string or any other default value
+  const [street, setStreet] = useState('Grvl'); // Default value for Street
+  const [conditional1, setConditional1] = useState('Artery'); // Default value for Condition1
+  const [houseStyle, setHouseStyle] = useState('1Story'); // Default value for HouseStyle
+  const [overallCond, setOverallCond] = useState('10'); // Default value for OverallCond
+  const [roofStyle, setRoofStyle] = useState('1Story'); // Default value for RoofStyle
+  const [roofMat1, setRoofMat1] = useState('ClyTile'); // You can set an empty string or any other default value
+  const [foundation, setFoundation] = useState('BrkTil'); // Default value for Foundation
+  const [bsmtQual, setBsmtQual] = useState('Ex'); // Default value for BsmtQual
+  const [heating, setHeating] = useState('Floor'); // Default value for Heating
+  const [heatingQC, setHeatingQC] = useState('Ex'); // Default value for HeatingQC
+  const [centralAir, setCentralAir] = useState('N'); // Default value for CentralAir
+  const [electrical, setElectrical] = useState('SBrkr'); // Default value for Electrical
+  const [fullBath, setFullBath] = useState(''); // You can set an empty string or any other default value
+  const [kitchenQual, setKitchenQual] = useState('Ex'); // Default value for KitchenQual
+  const [totRmsAbvGrd, setTotRmsAbvGrd] = useState(''); // You can set an empty string or any other default value
+  const [functional, setFunctional] = useState('Typ'); // Default value for Functional
+  const [garageType, setGarageType] = useState('2Types'); // Default value for GarageType
+  const date = new Date();
 
-  const [bedrooms, setBedrooms] = useState('No');
-  const [propertySize, setPropertySize] = useState('1000');
-  const [resale, setResale] = useState('No');
-  const [maintenanceStaff, setMaintenanceStaff] = useState('No');
-  const [gymnasium, setGymnasium] = useState('No');
-  const [swimmingPool, setSwimmingPool] = useState('No');
-  const [landscapedGardens, setLandscapedGardens] = useState('No');
-  const [joggingTrack, setJoggingTrack] = useState('No');
-  const [rainWaterHarvesting, setRainWaterHarvesting] = useState('No');
-  const [indoorGames, setIndoorGames] = useState('No');
-  const [shoppingmall, setShoppingMall] = useState('No');
-  const [interCom, SetInterCom] = useState('No');
-  const [sportsFacility, setSportsFacility] = useState('No');
-  const [atm, setAtm] = useState('No');
-  const [clubHouse, setClubHouse] = useState('No');
-  const [school, setSchool] = useState('No');
-  const [security, SetSecurity] = useState('No');
-  const [powerBackup, setPowerBackup] = useState('No');
-  const [carparking, setCarParking] = useState('No');
-  const [staffQuarter, setStaffQuarter] = useState('No');
-  const [cafteria, setCafteria] = useState('No');
-  const [multiPurposeRoom, setMultiPurposeRoom] = useState('No');
-  const [hospital, setHospital] = useState('No');
-  const [washingMachine,setWashingMachine]=useState('No')
-  const [gasConnection, setGasConnection] = useState('No');
-  const [AC, setAC] = useState('No');
-  const [wifi, setWifi] = useState('No');
-  const [childrenArea, setChildrenArea] = useState('No');
-  const [lift, setLift] = useState('No');
-  const [bed, setBed] = useState('No');
-  const [microWaveOwen, setMIcroWaveOwen] = useState('No');
-  const [TV, setTV] = useState('No');
-  const [sofa, setSofa] = useState('No');
-  const [wardrobe, setWardrobe] = useState('No');
-
-  const [date, setDate] = useState(new Date());
-  const [isChecked, setIsChecked] = useState(false);
-
+  
   const color = () => {};
 
   const handleSubmit = async () => {
     const propertyData = {
-      price: 26500,
-      Area : propertySize,
-      Bedrooms: bedrooms,
-      Resale: resale,
-      MaintenanceStaff: maintenanceStaff,
-      Gymnasium: gymnasium,
-      SwimmingPool:swimmingPool,
-      LandscapedGardens:landscapedGardens,
-      JoggingTrack:joggingTrack,
-      RainWaterHarvesting:rainWaterHarvesting,
-      IndoorGames:indoorGames,
-      ShoppingMall:shoppingmall,
-      InterCom:interCom,
-      sportsFacility:sportsFacility,
-      ATM:atm,
-      ClubHouse:clubHouse,
-      School:school,
-      Security:security,
-      powerBackup:powerBackup,
-      CarParking:carparking,
-      StaffQuarter:staffQuarter,
-      Cafteria:cafteria,
-      MultiPurposeRoom:multiPurposeRoom,
-      Hospital:hospital,
-      WashingMachine:washingMachine,
-      GasConnection:gasConnection,
-      AC:AC,
-      Wifi:wifi,
-      Childrenplayarea:childrenArea,
-      LiftAvailable:lift,
-      Bed:bed,
-      Microwave:microWaveOwen,
-      TV:TV,
-      Sofa:sofa,
-      Wardrobe:wardrobe,
+      price:2000,
+      MSZoning: msZoning,
+      LotArea: lotArea,
+      Street: street,
+      Condition1: conditional1,
+      HouseStyle: houseStyle,
+      HouseStyle:overallCond,
+      RoofStyle: roofStyle,
+      RoofMatl:roofMat1,
+      Foundation:foundation,
+      BsmtQual:bsmtQual,
+      Heating:heating,
+      HeatingQC:heatingQC,
+      CentralAir:centralAir,
+      Electrical:electrical,
+      FullBath:fullBath,
+      KitchenQual:kitchenQual,
+      TotRmsAbvGrd:totRmsAbvGrd,
+      Functional:functional,
+      GarageType:garageType,
       // location:userD.place,
       userName: userD.name,
       phone: userD.phone,
@@ -109,373 +76,275 @@ const Home = ({route}) => {
         <Text style={styles.heading}>Predict The Price of House</Text>
       </View>
       <ScrollView>
-        <Text style={[styles.formText,{fontSize:20}]}>Bedrooms</Text>
-        <TextInput
-          onChangeText={setBedrooms}
-          placeholder="Enter Number Of Bed rooms"
-          style={styles.inputs}
-          placeholderTextColor={'black'}
-        />
-
-        <Text style={[styles.formText,{fontSize:20}]}>Property Size</Text>
-        <View style={styles.contentView}>
-          <Text
-            style={[styles.formText, {color: '#1ebf94', fontWeight: '500'}]}>
-            Up to {propertySize}sqft
-          </Text>
-
-          <Slider
-            value={propertySize}
-            onValueChange={setPropertySize}
-            maximumValue={6000}
-            minimumValue={1000}
-            step={1}
-            allowTouchTrack
-            trackStyle={{height: 5, backgroundColor: '#1ebf94'}}
-            thumbStyle={{
-              height: 20,
-              width: 10,
-              backgroundColor: '#1ebf94',
-            }}
-            thumbProps={{
-              children: (
-                <Icon
-                  name="circle"
-                  type="font-awesome"
-                  size={10}
-                  reverse
-                  containerStyle={{bottom: 10, right: 10}}
-                  color={'#1ebf94'}
-                />
-              ),
-            }}
-          />
-        </View>
-
         {/*  */}
-        <View style={styles.row}>
-  <View style={styles.checkBoxRow}>
-    <CheckBox
-      isChecked={resale === 'Yes'}
-      onClick={() => setResale(resale === 'Yes' ? 'No' : 'Yes')}
-    />
-    <Text style={[styles.formText, { fontWeight: '500' }]}>Resale</Text>
-  </View>
-  <View style={styles.checkBoxRow}>
-    <CheckBox
-      isChecked={maintenanceStaff === 'Yes'}
-      onClick={() =>
-        setMaintenanceStaff(
-          maintenanceStaff === 'Yes' ? 'No' : 'Yes'
-        )
-      }
-    />
-    <Text style={[styles.formText, { fontWeight: '500'}]}>
-      Maintenance Staff
-    </Text>
-  </View>
-</View>
-
-{/* Repeat this structure for other checkboxes */}
-
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={gymnasium === 'Yes'}
-      onClick={() => setGymnasium(gymnasium === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Gymnasium
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={swimmingPool === 'Yes'}
-      onClick={() => setSwimmingPool(swimmingPool === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Swimming Pool
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={landscapedGardens === 'Yes'}
-      onClick={() => setLandscapedGardens(landscapedGardens === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              LandscapedGardens
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={joggingTrack === 'Yes'}
-      onClick={() => setJoggingTrack(joggingTrack === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Jogging Track
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={rainWaterHarvesting === 'Yes'}
-      onClick={() => setRainWaterHarvesting(rainWaterHarvesting === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Rain Water Harvesting
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={indoorGames === 'Yes'}
-      onClick={() => setIndoorGames(indoorGames === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Indoor Games
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={shoppingmall === 'Yes'}
-      onClick={() => setShoppingMall(shoppingmall === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Shopping Mall
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={interCom === 'Yes'}
-      onClick={() => SetInterCom(interCom === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>InterCom</Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={sportsFacility === 'Yes'}
-      onClick={() => setSportsFacility(sportsFacility === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Sports Facility
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={atm=== 'Yes'}
-      onClick={() => setAtm(atm === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>ATM</Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={clubHouse === 'Yes'}
-      onClick={() => setClubHouse(clubHouse === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Club House
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={school === 'Yes'}
-      onClick={() => setSchool(school === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>School</Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={security === 'Yes'}
-      onClick={() => SetSecurity(security === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              24X7 Security
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-            <CheckBox
-      isChecked={powerBackup === 'Yes'}
-      onClick={() => setPowerBackup(powerBackup === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Power Backup
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={carparking === 'Yes'}
-      onClick={() => setCarParking(carparking === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Car Parking
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={staffQuarter === 'Yes'}
-      onClick={() => setStaffQuarter(staffQuarter === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Staff Quarter
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={cafteria === 'Yes'}
-      onClick={() => setCafteria(cafteria === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Cafeteria
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={multiPurposeRoom === 'Yes'}
-      onClick={() => setMultiPurposeRoom(multiPurposeRoom === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Multi Purpose Room
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={hospital === 'Yes'}
-      onClick={() => setHospital(hospital === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>Hospital</Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={washingMachine === 'Yes'}
-      onClick={() => setWashingMachine(washingMachine === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Washing Machine
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={gasConnection === 'Yes'}
-      onClick={() => setGasConnection(washingMachine=== 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Gas Connection
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={AC === 'Yes'}
-      onClick={() => setAC(AC === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>AC</Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={wifi === 'Yes'}
-      onClick={() => setWifi(wifi === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>Wifi</Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={childrenArea === 'Yes'}
-      onClick={() => setChildrenArea(childrenArea === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Chilren's play Area
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={lift === 'Yes'}
-      onClick={() => setLift(lift === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Lift Available
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={bed=== 'Yes'}
-      onClick={() => setBed(bed === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>Bed</Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={microWaveOwen === 'Yes'}
-      onClick={() => setMIcroWaveOwen(microWaveOwen === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>
-              Micro Wave owen
-            </Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-            <CheckBox
-      isChecked={TV === 'Yes'}
-      onClick={() => setTV(TV=== 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>TV</Text>
-          </View>
-        </View>
-
-        <View style={styles.row}>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={sofa === 'Yes'}
-      onClick={() => setSofa(sofa === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>Sofa</Text>
-          </View>
-          <View style={styles.checkBoxRow}>
-          <CheckBox
-      isChecked={wardrobe === 'Yes'}
-      onClick={() => setWardrobe(wardrobe === 'Yes' ? 'No' : 'Yes')}
-    />
-            <Text style={[styles.formText, {fontWeight: '500'}]}>wardrobe</Text>
-          </View>
-        </View>
+      <Text style={styles.formText}>MSZoning</Text>
+      <Picker
+        selectedValue={msZoning}
+        onValueChange={(itemValue) => setMsZoning(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Agriculture" value="A" />
+        <Picker.Item label="Commercial" value="C" />
+        <Picker.Item label="Floating Village Residential" value="FV" />
+        <Picker.Item label="Industrial" value="I" />
+        <Picker.Item label="Residential High Density" value="RH" />
+        <Picker.Item label="Residential Low Density" value="RL" />
+        <Picker.Item label="Residential Low Density Park" value="RP" />
+        <Picker.Item label="Residential Medium Density" value="RM" />
+      </Picker>
+      {/*  */}
+      <Text style={styles.formText}>LotArea</Text>
+      <TextInput
+          placeholder="Enter in Squre feet"
+          style={styles.inputs} placeholderTextColor="black"
+          onChangeText={setLotArea}></TextInput>
         {/*  */}
+        <Text style={styles.formText}>Street</Text>
+        <Picker
+        selectedValue={street}
+        onValueChange={(itemValue) => setStreet(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Gravel" value="Grvl" />
+        <Picker.Item label="Paved" value="Pave" />
+      </Picker>
+      {/*  */}
+      
+      {/*  */}
+      <Text style={styles.formText}>Condition1: Proximity to various conditions</Text>
+      <Picker
+        selectedValue={conditional1}
+        onValueChange={(itemValue) => setConditional1(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Adjacent to arterial street" value="Artery" />
+        <Picker.Item label="Adjacent to feeder street" value="Feedr" />
+        <Picker.Item label="Normal" value="Norm" />
+        <Picker.Item label="Within 200' of North-South Railroad" value="RRNn" />
+        <Picker.Item label="Adjacent to North-South Railroad" value="RRAn" />
+        <Picker.Item label="Near positive off-site feature--park, greenbelt, etc." value="PosN" />
+        <Picker.Item label="Adjacent to postive off-site feature" value="PosA" />
+        <Picker.Item label="Within 200' of East-West Railroad" value="RRNe" />
+        <Picker.Item label="Adjacent to East-West Railroad" value="RRAe" />
+      </Picker>
+      {/*  */}
 
-        {/*  */}
+      <Text style={styles.formText}>HouseStyle</Text>
+      <Picker
+        selectedValue={houseStyle}
+        onValueChange={(itemValue) => setHouseStyle(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="One story" value="1Story	" />
+        <Picker.Item label="One and one-half story: 2nd level finished" value="1.5Fin"/>
+        <Picker.Item label="One and one-half story: 2nd level unfinished" value="1.5Unf" />
+        <Picker.Item label="Two story" value="2Story" />
+        <Picker.Item label="Two and one-half story: 2nd level finished" value="2.5Fin" />
+        <Picker.Item label="Two and one-half story: 2nd level unfinished" value="2.5Unf" />
+        <Picker.Item label="Split Foyer" value="SFoyer" />
+        <Picker.Item label="Split Level" value="SLvl" />
+      </Picker>
+      {/*  */}
+      <Text style={styles.formText}>OverallCond: Rates the overall condition of the house</Text>
+      <Picker
+        selectedValue={overallCond}
+        onValueChange={(itemValue) => setOverallCond(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Very Excellent" value="10" />
+        <Picker.Item label="Excellent" value="9" />
+        <Picker.Item label="Very Good" value="8" />
+        <Picker.Item label="Good" value="7" />
+        <Picker.Item label="Above Average" value="6" />
+        <Picker.Item label="Average" value="5" />
+        <Picker.Item label="Below Average" value="4" />
+        <Picker.Item label="Fair" value="3" />
+        <Picker.Item label="Poor" value="2" />
+        <Picker.Item label="Very Poor" value="1" />
+      </Picker>
+      {/*  */}
+      {/*  */}
+
+      <Text style={styles.formText}>RoofStyle</Text>
+      <Picker
+        selectedValue={roofStyle}
+        onValueChange={(itemValue) => setRoofStyle(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Flat" value="1Story	" />
+        <Picker.Item label="Gable" value="Gable"/>
+        <Picker.Item label="Gabrel (Barn)" value="Gambrel" />
+        <Picker.Item label="Hip" value="Hip" />
+        <Picker.Item label="Mansard" value="Mansard" />
+        <Picker.Item label="Shed" value="Shed" />
+       
+      </Picker>
+      {/*  */}
+
+      <Text style={styles.formText}>Roof Material</Text>
+      <Picker
+        selectedValue={roofMat1}
+        onValueChange={(itemValue) => setRoofMat1(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Clay or Tile" value="ClyTile" />
+        <Picker.Item label="Standard (Composite) Shingle" value="CompShg"/>
+        <Picker.Item label="Membrane" value="Membrane" />
+        <Picker.Item label="Metal" value="Metal" />
+        <Picker.Item label="Gravel & Tar" value="Tar&Grv" />
+        <Picker.Item label="Wood Shakes" value="WdShake" />
+        <Picker.Item label="Wood Shingles" value="WdShngl" />
+      </Picker>
+
+       {/*  */}
+
+       <Text style={styles.formText}>Foundation</Text>
+      <Picker
+        selectedValue={foundation}
+        onValueChange={(itemValue) => setFoundation(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Brick & Tile" value="BrkTil" />
+        <Picker.Item label="Cinder Block" value="CBlock"/>
+        <Picker.Item label="Poured Contrete" value="PConc" />
+        <Picker.Item label="Slab" value="Slab" />
+        <Picker.Item label="Stone" value="Stone" />
+        <Picker.Item label="Wood" value="Wood" />
+      </Picker>
+       {/*  */}
+
+       <Text style={styles.formText}>BsmtQual</Text>
+      <Picker
+        selectedValue={bsmtQual}
+        onValueChange={(itemValue) => setBsmtQual(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Excellent (100+ inches)" value="Ex" />
+        <Picker.Item label="Good (90-99 inches)" value="Gd" />
+        <Picker.Item label="Typical (80-89 inches)" value="Ta" />
+        <Picker.Item label="Fair (70-79 inches)" value="Ta" />
+        <Picker.Item label="Poor (<70 inches)" value="Po" />
+        <Picker.Item label="No Basement" value="NA" />
+      </Picker>
+
+      {/*  */}
+
+      <Text style={styles.formText}>Heating</Text>
+      <Picker
+        selectedValue={heating}
+        onValueChange={(itemValue) => setHeating(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Floor Furnace" value="Floor" />
+        <Picker.Item label="Gas forced warm air furnace" value="GasA" />
+        <Picker.Item label="Gas hot water or steam heat" value="GasW" />
+        <Picker.Item label="Gravity furnace" value="Grav" />
+        <Picker.Item label="Hot water or steam heat other than gas" value="OthW" />
+        <Picker.Item label="Wall furnace" value="Wall" />
+      </Picker>
+
+      {/*  */}
+
+      <Text style={styles.formText}>HeatingQC</Text>
+      <Picker
+        selectedValue={heatingQC}
+        onValueChange={(itemValue) => setHeatingQC(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Excellent" value="Ex" />
+        <Picker.Item label="Good" value="Gd" />
+        <Picker.Item label="Average/Typical" value="TA" />
+        <Picker.Item label="Fair" value="Fa" />
+        <Picker.Item label="Poor" value="Po" />
+      </Picker>
+
+       {/*  */}
+
+       <Text style={styles.formText}>CentralAir</Text>
+      <Picker
+        selectedValue={centralAir}
+        onValueChange={(itemValue) => setCentralAir(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="No" value="N" />
+        <Picker.Item label="Yes" value="Y" />
+      </Picker>
+      {/*  */}
+
+      <Text style={styles.formText}>Electrical</Text>
+      <Picker
+        selectedValue={electrical}
+        onValueChange={(itemValue) => setElectrical(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Standard Circuit Breakers & Romex" value="SBrkr" />
+        <Picker.Item label="Fuse Box over 60 AMP and all Romex wiring (Average)" value="FuseA" />
+        <Picker.Item label="60 AMP Fuse Box and mostly Romex wiring (Fair)" value="FuseF" />
+        <Picker.Item label="60 AMP Fuse Box and mostly knob & tube wiring (poor)" value="FuseP" />
+        <Picker.Item label="Mixed" value="Mix" />
+      </Picker>
+      {/* ? */}
+
+      <Text style={styles.formText}>FullBath</Text>
+      <TextInput
+          placeholder=" Total rooms above grade (does not include bathrooms)"
+          style={styles.inputs} placeholderTextColor="black"
+          onChangeText={setFullBath}></TextInput>
+       {/*  */}
+
+
+       <Text style={styles.formText}>KitchenQual</Text>
+      <Picker
+        selectedValue={kitchenQual}
+        onValueChange={(itemValue) => setKitchenQual(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Excellent" value="Ex" />
+        <Picker.Item label="Good" value="Gd" />
+        <Picker.Item label="Average/Typical" value="TA" />
+        <Picker.Item label="Fair" value="Fa" />
+        <Picker.Item label="Poor" value="Po" />
+      </Picker>
+      {/*  */}
+      <Text style={styles.formText}>Total Rooms Abve Grade</Text>
+      <TextInput
+          placeholder=" Total rooms above grade (does not include bathrooms)"
+          style={styles.inputs} placeholderTextColor="black"
+          onChangeText={setTotRmsAbvGrd}></TextInput>
+       {/*  */}
+
+      <Text style={styles.formText}>Home functionality</Text>
+      <Picker
+        selectedValue={functional}
+        onValueChange={(itemValue) => setFunctional(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="Typical Functionality" value="Typ" />
+        <Picker.Item label="Minor Deductions 1" value="Min1" />
+        <Picker.Item label="Minor Deductions 2" value="Min2" />
+        <Picker.Item label="Moderate Deductions" value="Mod" />
+        <Picker.Item label="Major Deductions 1" value="Maj1" />
+        <Picker.Item label="Major Deductions 2" value="Maj2" />
+        <Picker.Item label="Severely Damaged" value="Sev" />
+        <Picker.Item label="Poor" value="Sal" />
+      </Picker>
+      {/*  */}
+      <Text style={styles.formText}>GarageType: Garage location</Text>
+      <Picker
+        selectedValue={garageType}
+        onValueChange={(itemValue) => setGarageType(itemValue)}
+        style={styles.inputs}
+      >
+        <Picker.Item label="More than one type of garage" value="2Types" />
+        <Picker.Item label="Attached to home" value="Attchd" />
+        <Picker.Item label="Basement Garage" value="Basment" />
+        <Picker.Item label="Built-In (Garage part of house - typically has room above garage)" value="BuiltIn" />
+        <Picker.Item label="Car Port" value="CarPort" />
+        <Picker.Item label="Detached from home" value="Detchd" />
+        <Picker.Item label="No Garage" value="NA" />
+      </Picker>
+      
+  
 
         <TouchableOpacity style={styles.btnsubmit} onPress={handleSubmit}>
           <Text style={[styles.btnText, {fontSize: 18, color: 'white'}]}>
@@ -524,7 +393,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     fontSize: 17,
     color: 'black',
-    marginHorizontal: 5,
+    marginHorizontal: 10,
     // marginLeft:-80
   },
   btnGroup: {
@@ -567,7 +436,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     borderRadius: 10,
     marginBottom: 20,
-    marginTop:10
+    marginTop:10,
+    borderWidth:1,
+    padding:5,
+    borderColor:'black'
   },
 });
 export default Home;
